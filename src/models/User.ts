@@ -3,7 +3,6 @@
  * -Cannot be Instantiated
  */
 abstract class User {
-  private userId: string;
   private static _nextUserId: number = 1;
 
   constructor(
