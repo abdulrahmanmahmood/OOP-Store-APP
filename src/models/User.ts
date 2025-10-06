@@ -11,8 +11,16 @@ abstract class User {
     protected _email: string
   ) {}
 
-  // Getters
+  // METHODS
+  abstract getRole(): string;
+  abstract getPermissions(): string;
 
+  // Concreate method -shared by all subclasses
+  public getInfo(): string {
+    return `${this._name} (${this._email}) ${this.getRole()}`;
+  }
+
+  // Getters
   get name(): string {
     return this._name;
   }
@@ -30,5 +38,21 @@ abstract class User {
       throw new Error("Name must be at least 2 charcters long!");
     }
     this._name = newName.trim();
+  }
+  set email(newEmail: string) {
+    if (!newEmail || !this.isValidEmail(newEmail)) {
+      if (!newEmail) throw Error("Email is requerd ");
+      throw Error("Invalid Email Format");
+    } else {
+      this._email = newEmail.toLowerCase().trim();
+    }
+  }
+
+  /**
+   * Private helper method to validate emal format
+   */
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 }
