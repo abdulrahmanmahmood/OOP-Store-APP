@@ -1,19 +1,20 @@
+import { CustomerPermissoin, UserType } from "../types/user";
+
 /**
  * Abstract Class for all users types
  * -Cannot be Instantiated
  */
-abstract class User {
+export abstract class User {
+  protected readonly userId: number;
   private static _nextUserId: number = 1;
 
-  constructor(
-    protected readonly userId: string,
-    protected _name: string,
-    protected _email: string
-  ) {}
+  constructor(protected _name: string, protected _email: string) {
+    this.userId = User._nextUserId++;
+  }
 
   // METHODS
-  abstract getRole(): string;
-  abstract getPermissions(): string;
+  abstract getRole(): UserType;
+  abstract getPermissions(): CustomerPermissoin[];
 
   // Concreate method -shared by all subclasses
   public getInfo(): string {
