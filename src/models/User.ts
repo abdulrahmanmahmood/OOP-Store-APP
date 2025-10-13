@@ -1,4 +1,4 @@
-import { CustomerPermissoin, UserType } from "../types/user";
+import { AdminPermission, CustomerPermissoin, UserType } from "../types/user";
 
 /**
  * Abstract Class for all users types
@@ -14,7 +14,7 @@ export abstract class User {
 
   // METHODS
   abstract getRole(): UserType;
-  abstract getPermissions(): CustomerPermissoin[];
+  abstract getPermissions(): CustomerPermissoin[] | AdminPermission[];
 
   // Concreate method -shared by all subclasses
   public getInfo(): string {
@@ -28,6 +28,9 @@ export abstract class User {
 
   get email(): string {
     return this._email;
+  }
+  get Id(): number {
+    return this.userId;
   }
 
   // Setters

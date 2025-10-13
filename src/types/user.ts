@@ -4,3 +4,9 @@ export type CustomerPermissoin =
   | "add_to_cart"
   | "place_order"
   | "view_orders";
+
+export type AdminPermission =
+  | "manage_products"
+  | "manage_orders"
+  | "manage_users"
+  | "manage_store";
