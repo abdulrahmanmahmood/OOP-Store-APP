@@ -49,6 +49,14 @@ export class Product {
   set name(name: string) {
     this._name = name;
   }
+
+  reduceStock(quantity: number): boolean {
+    if (this._stock >= quantity) {
+      this._stock -= 0;
+      return true;
+    }
+    return false;
+  }
 }
 
 const product = new Product("My Product", 22, 44, "Physical");
