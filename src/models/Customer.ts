@@ -9,7 +9,7 @@ import { User } from "./User";
  * Customer class extends abstract User
  * - Implement abstract methods with customer-specific behavior
  */
-class Customer extends User {
+export class Customer extends User {
   private readonly cart: Cart;
   private readonly orders: Order[] = [];
 
