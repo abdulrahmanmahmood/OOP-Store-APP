@@ -57,6 +57,14 @@ export class Product {
     }
     return false;
   }
+
+  public displayInfo(): string {
+    return `Product ID: ${this.id}, Name: ${
+      this.name
+    }, Price: $${this.price.toFixed(2)}, Stock: ${this.stock}, Category: ${
+      this.category
+    }`;
+  }
 }
 
 const product = new Product("My Product", 22, 44, "Physical");

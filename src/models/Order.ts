@@ -143,6 +143,12 @@ export class Order {
       0
     );
   }
+  public static getAverageOrderValue(): number {
+    const allOrders = Order.getAllOrders();
+    if (allOrders.length === 0) return 0;
+    const totalRevenue = Order.getTotalRevenue();
+    return totalRevenue / allOrders.length;
+  }
 
   // Setters
 

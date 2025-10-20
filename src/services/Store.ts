@@ -97,7 +97,22 @@ class Store {
     }
     this.products.push(product);
   }
-
+  /**
+   * Removes a product from the store
+   * @param productId
+   */
+  public removeProduct(productId: number): void {
+    if (!this._isOpen) {
+      throw new Error("Store is closed");
+    }
+    const productIndex = this.products.findIndex(
+      (product) => product.id === productId
+    );
+    if (productIndex === -1) {
+      throw new Error("Product not found");
+    }
+    this.products.splice(productIndex, 1);
+  }
   /**
    * Return a copy of all products
    * @returns Acopy of all Products
@@ -144,6 +159,7 @@ class Store {
   /**
    *
    * @param order
+   * @throws Error if store is closed or order is invalid
    */
   public processOrder(order: Order): void {
     if (!this._isOpen) {
@@ -181,5 +197,27 @@ class Store {
    */
   public getOrders(): Order[] {
     return [...this.orders];
+  }
+
+  private getStoreStatus(): string {
+    return `Store "${this._storeName}" is currently ${
+      this._isOpen ? "Open" : "Closed"
+    },
+    with ${this.productCount} products available for purchase.
+    Total Users: ${this.users.length},
+    Total Orders Processed: ${Order.getAllOrders().length}.
+    Average order value: $${Order.getAverageOrderValue()}.
+    total customers: $${
+      this.users.filter((user) => user.getRole() === "Customer").length
+    }
+    total admins: $${
+      this.users.filter((user) => user.getRole() === "Admin").length
+    }  
+    total products: $${this.products.length}
+    Total Revenue: $${Order.getTotalRevenue()}.
+    products created: $${Order.getAllOrders().length}
+    
+
+    `;
   }
 }
